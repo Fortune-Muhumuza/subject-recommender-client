@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  /* flex-direction: column; */
+}
+
+.nav {
+  background-color: dodgerblue;
+}
+.nav > h3 {
+  color: aliceblue;
+}
+
+.form {
+  max-width: 30%;
+  border: 1px solid rgb(213, 236, 243);
+  padding: 10px;
+  flex: 1;
+  margin-right: 10px;
+}
+.page_contents {
+  display: flex;
+}
+.response_container {
+  padding: 5px;
+  width: 40%;
+}
+
+.subject_card_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.subject_card {
+  background: lightgreen;
+  color: white;
+  font-weight: 600;
+  width: 200px;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+
+
+.page_contents {
+  flex: 1;
+  padding: 20px;
+}
+
+

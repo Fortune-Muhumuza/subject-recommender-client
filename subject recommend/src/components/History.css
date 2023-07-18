@@ -1,0 +1,21 @@
+.history_container {
+    padding: 20px;
+    width: 70%;
+    margin-right: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  }
+  
+  .history_container h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .history_container b {
+    color: #0077c2;
+  }
+  
+  .history_container p {
+    margin-bottom: 5px;
+  }
+  
