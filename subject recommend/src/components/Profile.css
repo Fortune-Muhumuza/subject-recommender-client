@@ -1,9 +1,11 @@
 .profile_container {
     padding: 20px;
-    /* width: 70%; */
+    width: 60vw;
     margin-right: 10px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    height: 90vh;
+    overflow-y: auto;
   }
   
   .profile_info {
@@ -19,6 +21,8 @@
     border-radius: 50%;
     margin-right: 20px;
   }
+
+  
   
   .profile_details h3 {
     margin-bottom: 10px;
@@ -36,4 +40,10 @@
   .profile_subjects ul li {
     margin-bottom: 5px;
   }
+  .student_picture{
+    height: 100px;
+    width: 100px;
+    border-radius: 100px;
+  }
+  
   
