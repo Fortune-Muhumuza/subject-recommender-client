@@ -1,7 +1,10 @@
+// Signup.js
+
 import React from "react";
-import { Form, Input, Button } from "antd";
-import { Link } from "react-router-dom";
+import { Form, Input, Button, Select } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+import axios from "axios";
 
 const layout = {
   labelCol: { span: 8 },
@@ -11,10 +14,18 @@ const layout = {
 const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
-
+const { Option } = Select;
 const Signup = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const navigate = useNavigate();
+  const onFinish = async (values) => {
+    try {
+      // Send a POST request to the backend server running on localhost:5000
+      await axios.post("https://subjectrec.onrender.com/api/users/register", values);
+      console.log("Success:", values);
+      navigate('/login')
+    } catch (error) {
+      alert('sorry, something went wrong, try again')
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -37,6 +48,16 @@ const Signup = () => {
           rules={[{ required: true, message: "Please input your username!" }]}
         >
           <Input />
+        </Form.Item>
+        <Form.Item
+          label="Role"
+          name="role"
+          rules={[{ required: true, message: "Please select your role!" }]}
+        >
+          <Select>
+            <Option value="teacher">Teacher</Option>
+            <Option value="student">Student</Option>
+          </Select>
         </Form.Item>
 
         <Form.Item
