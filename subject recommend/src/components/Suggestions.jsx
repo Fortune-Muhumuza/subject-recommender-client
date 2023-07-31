@@ -1,6 +1,8 @@
 import React from "react";
+import { useData } from "./DataContext";
 
 function Suggestions() {
+  const { apiResponse,fetchingAnswer } = useData()
   return (
     <div className="response_container">
       <h3>Suggested subjects</h3>
@@ -11,11 +13,10 @@ function Suggestions() {
         <div className="subject_card">Commerce</div>
       </div>
       <h4>Summary</h4>
-      <p>
-        Basing on the provided information, the suggested subjects for this
-        student are commerce , literature and art, this is because this studnent
-        has more abilities in the arts and creative areas
-      </p>
+
+     {!fetchingAnswer? <p>
+       {apiResponse?apiResponse:''}
+      </p>:<p>Fetching answer...</p>}
     </div>
   );
 }
