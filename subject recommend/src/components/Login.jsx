@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Form, Input, Button } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+import { UserContext } from "./UserContext";
+import axios from "axios";
 
 const layout = {
   labelCol: { span: 8 },
@@ -13,13 +15,32 @@ const tailLayout = {
 };
 
 const LoginForm = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const { setIsAuthenticated, setUser } = useContext(UserContext);
+  const navigate = useNavigate()
+  const onFinish = async (values) => {
+    try {
+      // Send a POST request to the backend server for login
+      const response = await axios.post("https://subjectrec.onrender.com/api/users/login", values);
+      const token = response.data.token;
+      console.log("Login successful. Token:", token);
+      const user = response.data.user;
+      // Save the token to local storage
+      // localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+      if(user.role ==='student'){
+navigate('/')}else{navigate('/history')}
+
+      // Update the authentication state to true
+      setIsAuthenticated(true);
+    } catch (error) {
+      console.log("Login failed:", error);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
 
   return (
     <div className="login_container">
