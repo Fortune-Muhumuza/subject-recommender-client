@@ -11,11 +11,13 @@
 }
 
 .form {
-  max-width: 30%;
+ width: 50vw;
   border: 1px solid rgb(213, 236, 243);
   padding: 10px;
   flex: 1;
   margin-right: 10px;
+  height: 100vh;
+  overflow: auto;
 }
 .page_contents {
   display: flex;
@@ -41,7 +43,10 @@
   margin-bottom: 5px;
 }
 
-
+.response_container{
+  height: 100vh;
+  overflow: auto;
+}
 
 .page_contents {
   flex: 1;
