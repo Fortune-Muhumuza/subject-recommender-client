@@ -1,50 +1,123 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from "react";
+import { Card, Input } from "antd";
+import { useData } from "./DataContext";
+import axios from "axios";
+import ClipLoader from "react-spinners/ClipLoader";
+import { UserContext } from "./UserContext";
 import './History.css'
-// import 'antd/dist/antd.css';
-import { Card, Input } from 'antd';
 
 const { Search } = Input;
-function Records() {
-    return (
-      <Card className="history_container" title={<h3>Records</h3>} bordered={false}>
-        <Search placeholder="Search students..." enterButton />
-        <p>
-          <b>Student name:</b> Tyler Bennett
-        </p>
-        <p>
-          <b>Career interests:</b> Computer science, Civil engineering, Accounting
-        </p>
-        <p>
-          <b>Grades:</b>
-        </p>
-        <ul>
-          <li>Maths: 60%</li>
-          <li>Physics: 60%</li>
-          <li>Literature: 60%</li>
-          <li>Commerce: 60%</li>
-        </ul>
-        <p>
-          <b>Recommended subjects:</b>
-        </p>
-        <ul>
-          <li>Maths</li>
-          <li>Physics</li>
-          <li>Literature</li>
-        </ul>
-        <p>
-          <b>Summary:</b>
-        </p>
-        <p>
-        Basing on the provided information, the suggested subjects for this
-        student are commerce , literature and art, this is because this studnent
-        has more abilities in the arts and creative areas
-      </p>
-        <p>
-          <b>Date Submitted:</b> Nov. 24th, 2021
-        </p>
-      </Card>
-    );
-  }
-  
 
-export default Records
+function Records() {
+  const { records, setRecords } = useData();
+  const [searchText, setSearchText] = useState("");
+  const [fetching, setFetching] = useState(false);
+  const { user } = useContext(UserContext);
+
+  const fetchRecords = async () => {
+    try {
+      setFetching(true);
+      const endpoint = user.role === "teacher" ? "records" : `singleRecord/${user._id}`;
+      const response = await axios.get(
+        `https://subjectrec.onrender.com/api/recommendations/${endpoint}`
+      );
+      setFetching(false);
+
+      if (user.role === "teacher") {
+        setRecords(response.data.records);
+      } else {
+        setRecords([response.data.record]);
+      }
+    } catch (error) {
+      console.error("Error fetching records:", error);
+    }
+  };
+
+  useEffect(() => {
+    // Fetch records from the backend API when the component mounts
+    fetchRecords();
+  }, []);
+  const handleSearch = (searchText) => {
+    setSearchText(searchText);
+    if (user.role === "teacher") {
+      if (searchText) {
+        const filteredRecords = records.filter((record) =>
+          record.studentName.toLowerCase().includes(searchText.toLowerCase())
+        );
+        setRecords(filteredRecords);
+      } else {
+        // If search text is empty, show all records
+        fetchRecords();
+      }
+    }
+  };
+  return (
+    <div className="history_container">
+       {user.role === "teacher" && (
+        <Search
+          placeholder="Search students..."
+          enterButton
+          value={searchText}
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+      )}
+      
+      <Card
+        
+        title={<h3>Records</h3>}
+        bordered={false}
+      >
+        {fetching ? (
+          <ClipLoader />
+        ) : (
+          records?.map((record) => (
+            <div key={record._id}>
+              {/* Use a unique key for each record */}
+              <p>
+                <b>Student name:</b> {record.studentName || "N/A"}
+                <b>Student ID:</b> {record.studentId || "N/A"}
+              </p>
+              {record.careerInterests && (
+                <p>
+                  <b>Career interests:</b>{" "}
+                  {record.careerInterests.CareerInterest1},{" "}
+                  {record.careerInterests.CareerInterest2}
+                </p>
+              )}
+              <p>
+                <b>Grades:</b>
+              </p>
+              <ul>
+                {record.grades && (
+                  <>
+                    <li>Maths: {record.grades.Maths}%</li>
+                    <li>Physics: {record.grades.Physics}%</li>
+                    <li>Literature: {record.grades.Literature}%</li>
+                    <li>Art: {record.grades.Art}%</li>
+                  </>
+                )}
+              </ul>
+              {/* Add other details as needed, e.g., hobbies, recommended subjects */}
+              {/* ... */}
+              {record.answer && (
+                <>
+                  <p>
+                    <b>Summary:</b>
+                  </p>
+                  <p>{record.answer}</p>
+                </>
+              )}
+              {record.createdAt && (
+                <p>
+                  <b>Date Submitted:</b> {record.createdAt}
+                </p>
+              )}
+            </div>
+          ))
+        )}
+      </Card>
+    </div>
+  );
+}
+
+export default Records;
