@@ -4,6 +4,7 @@ import { Form, Input, Button, Select } from "antd";
 import axios from "axios";
 import { useData } from "./DataContext";
 import { UserContext } from "./UserContext";
+import { useNavigate } from "react-router-dom";
 
 function DataForm() {
   const { setApiResponse, setFetchingAnswer } = useData();
@@ -14,11 +15,11 @@ function DataForm() {
       setFetchingAnswer(true);
 
       // Structure the input values into the question string
-      const question = `A student named ${user.username} has ${values["Maths"]} in Maths, ${values["Physics"]} in Physics, ${values["Literature"]} in Literature, ${values["Art"]} in Art, likes ${values["Hobby1"]}, ${values["Hobby2"]}, and ${values["CareerInterest1"]}. 
+      const question = `A student named ${user.username} has ${values["Maths"]} in Maths, ${values["Physics"]} in Physics, ${values["technicalDrawing"]} in technical drawing, ${values["commerce"]} in commerce, ${values["ICT"]} in ICT, ${values["Literature"]} in Literature, ${values["Art"]} in Art, likes ${values["Hobby1"]}, ${values["Hobby2"]}, and ${values["CareerInterest1"]}. 
       Between only Technicaldrawing, Music, Literature, Art, ICT and commerce, which 3 subjects and career do you recommend they pursue? Please provide a summary of your recommendation and a list of the recommended subjects.`;
       // Send the structured question to the backend API
       const response = await axios.post(
-        "https://subjectrec.onrender.com/api/recommendations/recommendations",
+        `${baseUrl}/api/recommendations/recommendations`,
         {
           question,
           studentId: user._id,
@@ -42,7 +43,7 @@ function DataForm() {
   const fetchAllStudents = async () => {
     try {
       const response = await axios.get(
-        "https://subjectrec.onrender.com/api/users/allStudents"
+        `${baseUrl}/api/users/allStudents`
       );
       setStudents(response.data);
     } catch (error) {
@@ -54,6 +55,7 @@ function DataForm() {
     <div className="form">
       <Form onFinish={onFinish}>
         <h4>Info</h4>
+        <p>Logged in as: {user.username}</p>
         {/* <Form.Item
           label="Student Name"
           name="studentName"
@@ -116,6 +118,42 @@ function DataForm() {
         <Form.Item
           label="Art"
           name="Art" // Use the correct name to match the question string
+          rules={[
+            {
+              required: true,
+              message: "Please enter your subject marks",
+            },
+          ]}
+        >
+          <Input placeholder="Enter subject marks" />
+        </Form.Item>
+        <Form.Item
+          label="TD"
+          name="technicalDrawing" // Use the correct name to match the question string
+          rules={[
+            {
+              required: true,
+              message: "Please enter your subject marks",
+            },
+          ]}
+        >
+          <Input placeholder="Enter subject marks" />
+        </Form.Item>
+        <Form.Item
+          label="ICT"
+          name="ICT" // Use the correct name to match the question string
+          rules={[
+            {
+              required: true,
+              message: "Please enter your subject marks",
+            },
+          ]}
+        >
+          <Input placeholder="Enter subject marks" />
+        </Form.Item>
+        <Form.Item
+          label="Commerce"
+          name="commerce" // Use the correct name to match the question string
           rules={[
             {
               required: true,

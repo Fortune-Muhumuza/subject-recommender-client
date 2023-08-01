@@ -20,7 +20,7 @@ const Signup = () => {
   const onFinish = async (values) => {
     try {
       // Send a POST request to the backend server running on localhost:5000
-      await axios.post("https://subjectrec.onrender.com/api/users/register", values);
+      await axios.post(`${baseUrl}/api/users/register`, values);
       console.log("Success:", values);
       navigate('/login')
     } catch (error) {

@@ -19,7 +19,7 @@ function Records() {
       setFetching(true);
       const endpoint = user.role === "teacher" ? "records" : `singleRecord/${user._id}`;
       const response = await axios.get(
-        `https://subjectrec.onrender.com/api/recommendations/${endpoint}`
+        `baseUrl/api/recommendations/${endpoint}`
       );
       setFetching(false);
 
@@ -71,7 +71,7 @@ function Records() {
           <ClipLoader />
         ) : (
           records?.map((record) => (
-            <div key={record._id}>
+            <div key={record._id} className="recordCard">
               {/* Use a unique key for each record */}
               <p>
                 <b>Student name:</b> {record.studentName || "N/A"}

@@ -45,7 +45,7 @@ function ProfilePage() {
 
         // Send the new student data (including the image) to the backend
         axios.post(
-          "https://subjectrec.onrender.com/api/users/addStudent",
+          `${baseUrl}/api/users/addStudent`,
           newStudent
         );
 
@@ -67,7 +67,7 @@ function ProfilePage() {
     try {
       setFetching(true);
       const response = await axios.get(
-        "https://subjectrec.onrender.com/api/users/allStudents"
+        `${baseUrl}/api/users/allStudents`
       );
       setFetching(false);
       setStudents(response.data);

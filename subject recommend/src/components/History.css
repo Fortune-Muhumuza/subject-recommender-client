@@ -20,4 +20,12 @@
   .history_container p {
     margin-bottom: 5px;
   }
+
+  .recordCard{
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 2px 11px 8px -6px rgba(120,125,128,0.56);
+    -webkit-box-shadow: 2px 11px 8px -6px rgba(120,125,128,0.56);
+    -moz-box-shadow: 2px 11px 8px -6px rgba(120,125,128,0.56);
+  }
   
