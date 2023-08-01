@@ -17,7 +17,7 @@
   padding: 10px;
   flex: 1;
   margin-right: 10px;
-  height: 100vh;
+  height: 90vh;
   overflow: auto;
 }
 .page_contents {
@@ -45,7 +45,7 @@
 }
 
 .response_container{
-  height: 100vh;
+  height: 90vh;
   overflow: auto;
 }
 
