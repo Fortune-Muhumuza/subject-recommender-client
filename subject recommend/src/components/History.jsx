@@ -96,7 +96,7 @@ function Records() {
                     <li>Literature: {record.grades.Literature}%</li>
                     <li>Art: {record.grades.Art}%</li>
                     <li> Commerce: {record.grades.commerce}%</li>
-                    <li> Technical Drawing": {record.grades.technicalDrawing}%</li>
+                    <li> Technical Drawing: {record.grades.technicalDrawing}%</li>
                     <li> ICT: {record.grades.ICT}%</li>
 
                   </>
