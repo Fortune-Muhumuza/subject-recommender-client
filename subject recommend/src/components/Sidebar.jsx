@@ -61,12 +61,12 @@ const Sidebar = () => {
                 className="menu_container"
                 onClick={() => {
                   setIsAuthenticated(false);
-                  // localStorage.removeItem("user");
+                  localStorage.removeItem("user");
                   navigate("/login");
                 }}
               >
                 <MdLock />
-                <p>Logout</p>
+              {  <p>Logout</p>}
               </div>
             </Link>
           </li>
