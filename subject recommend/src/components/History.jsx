@@ -24,7 +24,7 @@ function Records() {
       );
       setFetching(false);
 
-      if (user.role === "teacher") {
+      if (user.role === "admin") {
         setRecords(response.data.records);
       } else {
         setRecords([response.data.record]);
@@ -40,7 +40,7 @@ function Records() {
   }, []);
   const handleSearch = (searchText) => {
     setSearchText(searchText);
-    if (user.role === "teacher") {
+    if (user.role === "admin") {
       if (searchText) {
         const filteredRecords = records.filter((record) =>
           record.studentName.toLowerCase().includes(searchText.toLowerCase())
@@ -54,7 +54,7 @@ function Records() {
   };
   return (
     <div className="history_container">
-       {user.role === "teacher" && (
+       {user.role === "admin" && (
         <Search
           placeholder="Search students..."
           enterButton
@@ -72,49 +72,49 @@ function Records() {
           <ClipLoader />
         ) : (
           records?.map((record) => (
-            <div key={record._id} className="recordCard">
+            <div key={record?._id} className="recordCard">
               {/* Use a unique key for each record */}
               <p>
-                <b>Student name:</b> {record.studentName || "N/A"}
-                <b>Student ID:</b> {record.studentId || "N/A"}
+                <b>Student name:</b> {record?.studentName || "N/A"}
+                <b>Student ID:</b> {record?.studentId || "N/A"}
               </p>
-              {record.careerInterests && (
+              {record?.careerInterests && (
                 <p>
                   <b>Career interests:</b>{" "}
-                  {record.careerInterests.CareerInterest1},{" "}
-                  {record.careerInterests.CareerInterest2}
+                  {record?.careerInterests.CareerInterest1},{" "}
+                  {record?.careerInterests.CareerInterest2}
                 </p>
               )}
               <p>
                 <b>Grades:</b>
               </p>
               <ul>
-                {record.grades && (
+                {record?.grades && (
                   <>
-                    <li>Maths: {record.grades.Maths}%</li>
-                    <li>Physics: {record.grades.Physics}%</li>
-                    <li>Literature: {record.grades.Literature}%</li>
-                    <li>Art: {record.grades.Art}%</li>
-                    <li> Commerce: {record.grades.commerce}%</li>
-                    <li> Technical Drawing: {record.grades.technicalDrawing}%</li>
-                    <li> ICT: {record.grades.ICT}%</li>
+                    <li>Maths: {record?.grades.Maths}%</li>
+                    <li>Physics: {record?.grades.Physics}%</li>
+                    <li>Literature: {record?.grades.Literature}%</li>
+                    <li>Art: {record?.grades.Art}%</li>
+                    <li> Commerce: {record?.grades.commerce}%</li>
+                    <li> Technical Drawing: {record?.grades.technicalDrawing}%</li>
+                    <li> ICT: {record?.grades.ICT}%</li>
 
                   </>
                 )}
               </ul>
               {/* Add other details as needed, e.g., hobbies, recommended subjects */}
               {/* ... */}
-              {record.answer && (
+              {record?.answer && (
                 <>
                   <p>
                     <b>Summary:</b>
                   </p>
-                  <p>{record.answer}</p>
+                  <p>{record?.answer}</p>
                 </>
               )}
-              {record.createdAt && (
+              {record?.createdAt && (
                 <p>
-                  <b>Date Submitted:</b> {record.createdAt}
+                  <b>Date Submitted:</b> {record?.createdAt}
                 </p>
               )}
             </div>

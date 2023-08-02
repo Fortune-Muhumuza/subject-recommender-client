@@ -35,7 +35,7 @@ const Sidebar = () => {
               </li>
             </>
           )}
-          {user.role === "teacher" && (
+          {user.role === "admin" && (
             <>
               <li>
                 <Link to="/history">
