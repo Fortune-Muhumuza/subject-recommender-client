@@ -13,6 +13,7 @@ export const UserProvider = ({ children }) => {
 
   // Check if the user is already logged in based on the presence of user data
   const [isAuthenticated, setIsAuthenticated] = useState(!!user);
+  console.log('auth', isAuthenticated)
 
   return (
     <UserContext.Provider value={{ isAuthenticated, setIsAuthenticated, user }}>
