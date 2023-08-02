@@ -18,7 +18,7 @@ function Records() {
   const fetchRecords = async () => {
     try {
       setFetching(true);
-      const endpoint = user.role === "teacher" ? "records" : `singleRecord/${user._id}`;
+      const endpoint = user.role === "teacher" ? "records" : `singleRecord/${user.studentID}`;
       const response = await axios.get(
         `${baseUrl}/api/recommendations/${endpoint}`
       );
