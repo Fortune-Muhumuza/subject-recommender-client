@@ -9,6 +9,7 @@ import Records from "./components/History";
 import ProfilePage from "./components/Profile";
 import ForgotPasswordForm from "./components/ForgotPassword";
 import Signup from "./components/Signup";
+import ResetPasswordForm from "./components/ResetPassword";
 
 const RoutesWithRedirect = () => {
   const { isAuthenticated } = useContext(UserContext);
@@ -17,7 +18,7 @@ const RoutesWithRedirect = () => {
 
   useEffect(() => {
     if (isAuthenticated && location.pathname === "/login") {
-      navigate("/home");
+      navigate("/");
     } else if (!isAuthenticated && location.pathname !== "/login" && location.pathname !== "/forgotPassword" && location.pathname !== "/signup") {
       navigate("/login");
     }
@@ -28,6 +29,7 @@ const RoutesWithRedirect = () => {
       <Route path="/login" element={<LoginForm />} />
       <Route path="/forgotPassword" element={<ForgotPasswordForm />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/resetPassword" element={<ResetPasswordForm />} />
       
       {isAuthenticated && (
         <>
