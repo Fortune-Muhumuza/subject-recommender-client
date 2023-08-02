@@ -3,6 +3,7 @@ import { Card, Input, Modal, Form, Button, List } from "antd";
 import "./Profile.css";
 import axios from "axios";
 import ClipLoader from "react-spinners/ClipLoader";
+import { baseUrl } from "./baseVariables";
 
 const { Search } = Input;
 const { Item } = Form;
@@ -137,10 +138,10 @@ function ProfilePage() {
                   <p>
                     <b>Date of Birth (DOB):</b> {student.dob}
                   </p>
-                  <p>
+                  {/* <p>
                     <b>Subject Interests:</b>{" "}
                     {student.subjectInterests.join(", ")}
-                  </p>
+                  </p> */}
                 </div>
               </Card>
             </List.Item>
@@ -174,19 +175,6 @@ function ProfilePage() {
           </Item>
 
           <Item
-            label="Student ID"
-            name="studentID"
-            rules={[
-              {
-                required: true,
-                message: "Please enter the student's ID",
-              },
-            ]}
-          >
-            <Input placeholder="Enter student's ID" />
-          </Item>
-
-          <Item
             label="Grade Level"
             name="gradeLevel"
             rules={[
@@ -212,21 +200,7 @@ function ProfilePage() {
             <Input placeholder="Enter student's date of birth" />
           </Item>
 
-          <Item
-            label="Subject Interests"
-            name="subjectInterests"
-            rules={[
-              {
-                required: true,
-                message: "Please enter the student's subject interests",
-              },
-            ]}
-          >
-            <Input.TextArea
-              placeholder="Enter student's subject interests (separated by commas)"
-              autoSize={{ minRows: 2 }}
-            />
-          </Item>
+         
           <Item
             label="Student Picture"
             name="studentImage"
