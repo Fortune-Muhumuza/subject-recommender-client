@@ -149,9 +149,9 @@ const LoginForm = () => {
           <Link to="/signup">Create an account</Link>
         </Form.Item>
 
-        <Form.Item {...tailLayout}>
+        {/* <Form.Item {...tailLayout}>
           <Link to="/forgotPassword">Forgot Password</Link>
-        </Form.Item>
+        </Form.Item> */}
       </Form>
     </div>
   );
