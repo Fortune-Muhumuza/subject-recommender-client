@@ -1,6 +1,8 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
 import "./ForgotPassword.css";
+import axios from "axios";
+import { baseUrl } from "./baseVariables";
 
 const layout = {
   labelCol: { span: 8 },
@@ -12,8 +14,15 @@ const tailLayout = {
 };
 
 const ForgotPasswordForm = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const onFinish = async(values) => {
+    try {
+  
+      const response = await axios.post(`${baseUrl}/api/users/resetPassword`, values);
+    
+alert(response.data.message)
+    } catch (error) {
+      alert(error);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
