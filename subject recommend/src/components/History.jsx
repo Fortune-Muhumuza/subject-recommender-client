@@ -5,6 +5,7 @@ import axios from "axios";
 import ClipLoader from "react-spinners/ClipLoader";
 import { UserContext } from "./UserContext";
 import './History.css'
+import { baseUrl } from "./baseVariables";
 
 const { Search } = Input;
 
@@ -19,7 +20,7 @@ function Records() {
       setFetching(true);
       const endpoint = user.role === "teacher" ? "records" : `singleRecord/${user._id}`;
       const response = await axios.get(
-        `baseUrl/api/recommendations/${endpoint}`
+        `${baseUrl}/api/recommendations/${endpoint}`
       );
       setFetching(false);
 
