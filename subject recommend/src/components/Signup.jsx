@@ -23,6 +23,7 @@ const Signup = () => {
       // Send a POST request to the backend server running on localhost:5000
       await axios.post(`${baseUrl}/api/users/register`, values);
       console.log("Success:", values);
+      alert('Successfully registered')
       navigate('/login')
     } catch (error) {
       alert('sorry, something went wrong, try again')
@@ -50,7 +51,14 @@ const Signup = () => {
         >
           <Input />
         </Form.Item>
-        <Form.Item
+        {/* <Form.Item
+          label="Email"
+          name="email"
+          rules={[{ required: true, message: "Please input your email!" }]}
+        >
+          <Input />
+        </Form.Item> */}
+        {/* <Form.Item
           label="Role"
           name="role"
           rules={[{ required: true, message: "Please select your role!" }]}
@@ -59,7 +67,7 @@ const Signup = () => {
             <Option value="teacher">Teacher</Option>
             <Option value="student">Student</Option>
           </Select>
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item
           label="Password"
@@ -74,10 +82,10 @@ const Signup = () => {
             Register
           </Button>
         </Form.Item>
-
+{/* 
         <Form.Item {...tailLayout}>
           <Link to="/forgotPassword">Forgot Password</Link>
-        </Form.Item>
+        </Form.Item> */}
       </Form>
     </div>
   );
